@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct Home: View {
+    
+    @State private var expandedSheet: Bool = false
+    @Namespace private var animation
     var body: some View {
         // MARK: Tab View
         TabView {
@@ -23,19 +26,32 @@ struct Home: View {
         .safeAreaInset(edge: .bottom) {
             customBottomSheet()
         }
-        
+        .overlay(content: {
+            if expandedSheet {
+                ExpandedBottomSheet(expandSheet: $expandedSheet, animation: animation)
+                /// Transition for more fluent Animation
+                    .transition(.asymmetric(insertion: .identity, removal: .offset(y: -5)))
+            }
+        })
     }
     
     /// Custom Bottom Sheet
     @ViewBuilder
+    /// Animating Sheet Background (To Look Like It's Expanding From the Bottom)
     func customBottomSheet() -> some View {
         ZStack {
-            Rectangle()
-                .fill(.ultraThickMaterial)
-                .overlay {
-                    MusicInfo()
-                    
-                }
+            if expandedSheet {
+                Rectangle()
+                    .fill(.clear)
+            } else {
+                Rectangle()
+                    .fill(.ultraThickMaterial)
+                    .overlay {
+                        MusicInfo(expandedSheet: $expandedSheet, animation: animation)
+                        
+                    }
+                    .matchedGeometryEffect(id: "BGVIEW", in: animation)
+            }
         }
         .frame(height: 70)
         /// Seperator Line
@@ -71,23 +87,35 @@ struct Home: View {
 
 /// Reusable File
 struct MusicInfo: View {
+    @Binding var expandedSheet: Bool
+    var animation: Namespace.ID
     var body: some View {
         HStack(spacing: 0, content: {
-            GeometryReader {
-                let size = $0.size
-                
-                Image("Artwork")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: size.width, height: size.height)
-                    .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous ))
+            /// Adding Matched Geometry Effect
+            ZStack {
+                if !expandedSheet {
+                    GeometryReader {
+                        let size = $0.size
+                        
+                        Image("Artwork")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: size.width, height: size.height)
+                            .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous ))
+                    }
+                    .matchedGeometryEffect(id: "ARTWORK", in: animation)
+                } else {
+                    
+                }
             }
             .frame(width: 45, height: 45)
-            
+                        
             Text("Glimpse Of Us")
                 .fontWeight(.semibold)
                 .lineLimit(1)
                 .padding(.horizontal, 15)
+            
+            Spacer()
             
             Button {
                 
@@ -106,6 +134,15 @@ struct MusicInfo: View {
             .padding(.leading, 25)
             .frame(alignment: .trailing)
         })
-        .frame(width: UIScreen.main.bounds.width, alignment: .center)
+        .padding(.horizontal, 15)
+        .padding(.bottom, 7)
+        .frame(height: 70)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            /// Expanding Bottom Sheet
+            withAnimation(.easeInOut(duration: 0.3)) {
+                expandedSheet = true
+            }
+        }
     }
 }

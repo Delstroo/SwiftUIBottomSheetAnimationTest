@@ -12,6 +12,7 @@
 		1B0C09572BE2FD4600A4BE7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B0C09562BE2FD4600A4BE7F /* Assets.xcassets */; };
 		1B0C095B2BE2FD4600A4BE7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B0C095A2BE2FD4600A4BE7F /* Preview Assets.xcassets */; };
 		1B0C09632BE2FD5700A4BE7F /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0C09622BE2FD5700A4BE7F /* Home.swift */; };
+		1B0C09672BEC3D4B00A4BE7F /* ExpandedBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0C09662BEC3D4B00A4BE7F /* ExpandedBottomSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		1B0C09582BE2FD4600A4BE7F /* SwiftUIBottomSheetAnimation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftUIBottomSheetAnimation.entitlements; sourceTree = "<group>"; };
 		1B0C095A2BE2FD4600A4BE7F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B0C09622BE2FD5700A4BE7F /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		1B0C09662BEC3D4B00A4BE7F /* ExpandedBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedBottomSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				1B0C09622BE2FD5700A4BE7F /* Home.swift */,
+				1B0C09662BEC3D4B00A4BE7F /* ExpandedBottomSheet.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B0C09672BEC3D4B00A4BE7F /* ExpandedBottomSheet.swift in Sources */,
 				1B0C09552BE2FD3A00A4BE7F /* ContentView.swift in Sources */,
 				1B0C09632BE2FD5700A4BE7F /* Home.swift in Sources */,
 				1B0C09532BE2FD3A00A4BE7F /* SwiftUIBottomSheetAnimationApp.swift in Sources */,
