@@ -15,7 +15,16 @@ struct Home: View {
         // MARK: Tab View
         TabView {
             // MARK: Sample Tab's
-            sampleTabView("Listen Now", "play.circle.fill")
+            ListenNow()
+                .tabItem {
+                    Image(systemName: "play.circle.fill")
+                    Text("Listen Now")
+                }
+                /// Changing Tab Background Color
+                .toolbarBackground(.visible, for: .tabBar)
+                .toolbarBackground(.ultraThickMaterial, for: .tabBar)
+                /// Hiding Tab Bar when Sheet is Expanded
+                .toolbar(expandedSheet ? .hidden : .visible, for: .tabBar)
             sampleTabView("Browse", "square.grid.2x2.fill")
             sampleTabView("Radio", "dot.radiowaves.left.and.right")
             sampleTabView("Music", "play.square.stack")
@@ -33,6 +42,52 @@ struct Home: View {
                     .transition(.asymmetric(insertion: .identity, removal: .offset(y: -5)))
             }
         })
+    }
+    
+    /// Custom Listen Now View
+    @ViewBuilder
+    func ListenNow() -> some View {
+        NavigationStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 20) {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            Image("image1")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 250)
+                                .padding(.leading, 6)
+                                .clipShape(RoundedRectangle(cornerRadius: 23))
+                            Image("image2")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 250)
+                                .padding(.leading, 6)
+                                .clipShape(RoundedRectangle(cornerRadius: 23))
+                            Image("image3")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 250)
+                                .padding(.leading, 6)
+                                .clipShape(RoundedRectangle(cornerRadius: 23))
+                            Image("image4")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 250)
+                                .padding(.leading, 6)
+                                .clipShape(RoundedRectangle(cornerRadius: 23))
+                            Image("image5")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 250)
+                                .padding(.leading, 6)
+                                .clipShape(RoundedRectangle(cornerRadius: 23))
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Listen Now")
+        }
     }
     
     /// Custom Bottom Sheet
@@ -68,14 +123,14 @@ struct Home: View {
 
     @ViewBuilder
     func sampleTabView(_ title: String, _ icon: String) -> some View {
-        Text(title)
+        ScrollView(.vertical, showsIndicators: false) {
+            Text(title)
+                .padding(.top, 25)
+        }
             .tabItem {
                 Image(systemName: icon)
                 Text(title)
             }
-        /// Changing Tab Background Color
-            .toolbarBackground(.visible, for: .tabBar)
-            .toolbarBackground(.ultraThickMaterial, for: .tabBar)
     }
     
 }
@@ -124,15 +179,17 @@ struct MusicInfo: View {
                     .font(.title2)
             }
             .frame(alignment: .trailing)
-            
+            .foregroundStyle(.white)
+
             Button {
                 
             }label: {
                 Image(systemName: "forward.fill")
-                    .font(.title2)
+                    .font(.title3)
             }
             .padding(.leading, 25)
             .frame(alignment: .trailing)
+            .foregroundStyle(.white)
         })
         .padding(.horizontal, 15)
         .padding(.bottom, 7)
